@@ -28,6 +28,7 @@ public class Marketing extends AbstractEntity{
 	//测试
 	//测试
 	//chhj
+	//测试
 	@ApiModelProperty("营销类型 1：图片，2：图文，3：短信，4：彩信")
 	@Column(name = "marketing_type", length = 255)
 	private String marketingType;
