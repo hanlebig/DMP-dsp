@@ -1,0 +1,222 @@
+08:18:25.206 [main] INFO  com.taiyear.dsp.QuickStart - Starting QuickStart on Q4G31SSNBI1IJ76 with PID 3256 (started by Administrator in D:\搜狗高速下载\dsp-master\dsp-master\dsp) 
+08:18:25.226 [main] INFO  com.taiyear.dsp.QuickStart - No active profile set, falling back to default profiles: default 
+08:18:33.334 [main] ERROR o.s.boot.SpringApplication - Application startup failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaAutoConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1578)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:545)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1054)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:829)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766)
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180)
+	at com.taiyear.dsp.QuickStart.main(QuickStart.java:27)
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1249)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:120)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:860)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:850)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:425)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:849)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:60)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:343)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:319)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1637)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	... 16 common frames omitted
+Caused by: org.hibernate.AnnotationException: Use of the same entity name twice: SendMarketing
+	at org.hibernate.cfg.annotations.EntityBinder.bindEntity(EntityBinder.java:408)
+	at org.hibernate.cfg.AnnotationBinder.bindClass(AnnotationBinder.java:670)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processAnnotatedClassesQueue(Configuration.java:3845)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processMetadata(Configuration.java:3799)
+	at org.hibernate.cfg.Configuration.secondPassCompile(Configuration.java:1412)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1846)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:857)
+	... 24 common frames omitted
+Caused by: org.hibernate.DuplicateMappingException: duplicate import: SendMarketing refers to both com.taiyear.dsp.simple.entity.SendMarketing and com.taiyear.dsp.marketing.entity.SendMarketing (try using auto-import="false")
+	at org.hibernate.cfg.Configuration$MappingsImpl.addImport(Configuration.java:2892)
+	at org.hibernate.cfg.annotations.EntityBinder.bindEntity(EntityBinder.java:401)
+	... 30 common frames omitted
+08:20:21.610 [main] INFO  com.taiyear.dsp.QuickStart - Starting QuickStart on Q4G31SSNBI1IJ76 with PID 6180 (started by Administrator in D:\搜狗高速下载\dsp-master\dsp-master\dsp) 
+08:20:21.615 [main] INFO  com.taiyear.dsp.QuickStart - No active profile set, falling back to default profiles: default 
+08:20:26.450 [main] ERROR o.s.boot.SpringApplication - Application startup failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaAutoConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1578)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:545)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1054)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:829)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766)
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180)
+	at com.taiyear.dsp.QuickStart.main(QuickStart.java:27)
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1249)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:120)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:860)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:850)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:425)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:849)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:60)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:343)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:319)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1637)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	... 16 common frames omitted
+Caused by: org.hibernate.AnnotationException: Use of the same entity name twice: SendMarketing
+	at org.hibernate.cfg.annotations.EntityBinder.bindEntity(EntityBinder.java:408)
+	at org.hibernate.cfg.AnnotationBinder.bindClass(AnnotationBinder.java:670)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processAnnotatedClassesQueue(Configuration.java:3845)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processMetadata(Configuration.java:3799)
+	at org.hibernate.cfg.Configuration.secondPassCompile(Configuration.java:1412)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1846)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:857)
+	... 24 common frames omitted
+Caused by: org.hibernate.DuplicateMappingException: duplicate import: SendMarketing refers to both com.taiyear.dsp.simple.entity.SendMarketing and com.taiyear.dsp.marketing.entity.SendMarketing (try using auto-import="false")
+	at org.hibernate.cfg.Configuration$MappingsImpl.addImport(Configuration.java:2892)
+	at org.hibernate.cfg.annotations.EntityBinder.bindEntity(EntityBinder.java:401)
+	... 30 common frames omitted
+08:28:24.171 [main] INFO  com.taiyear.dsp.QuickStart - Starting QuickStart on Q4G31SSNBI1IJ76 with PID 4432 (started by Administrator in D:\搜狗高速下载\dsp-master\dsp-master\dsp) 
+08:28:24.174 [main] INFO  com.taiyear.dsp.QuickStart - No active profile set, falling back to default profiles: default 
+08:28:29.356 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_marketing 
+08:28:29.377 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_send_marketing 
+08:28:29.379 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_simple_plan 
+08:28:29.396 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_simple_teacher 
+08:28:29.398 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_marketing 
+08:28:29.399 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_send_marketing 
+08:28:29.400 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_simple_plan 
+08:28:29.401 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_simple_teacher 
+08:28:29.402 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_marketing 
+08:28:29.403 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_send_marketing 
+08:28:29.404 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_simple_plan 
+08:28:29.405 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_simple_teacher 
+08:28:29.930 [main] ERROR o.s.boot.SpringApplication - Application startup failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'simpleController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.taiyear.dsp.simple.service.SimpleService com.taiyear.dsp.simple.controller.SimpleController.simpleService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.taiyear.dsp.simple.service.SimpleService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766)
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180)
+	at com.taiyear.dsp.QuickStart.main(QuickStart.java:27)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.taiyear.dsp.simple.service.SimpleService com.taiyear.dsp.simple.controller.SimpleController.simpleService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.taiyear.dsp.simple.service.SimpleService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 17 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.taiyear.dsp.simple.service.SimpleService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
+	... 19 common frames omitted
+08:45:12.542 [main] INFO  com.taiyear.dsp.QuickStart - Starting QuickStart on Q4G31SSNBI1IJ76 with PID 7108 (started by Administrator in D:\搜狗高速下载\dsp-master\dsp-master\dsp) 
+08:45:12.551 [main] INFO  com.taiyear.dsp.QuickStart - No active profile set, falling back to default profiles: default 
+08:45:31.685 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed 
+08:45:31.798 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s) 
+08:45:31.842 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references 
+08:45:32.049 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: indexUsingPOST_1 
+08:45:32.277 [main] INFO  com.taiyear.dsp.QuickStart - Started QuickStart in 21.39 seconds (JVM running for 24.417) 
+08:48:13.048 [main] INFO  com.taiyear.dsp.QuickTest - Starting QuickTest on Q4G31SSNBI1IJ76 with PID 6600 (started by Administrator in D:\搜狗高速下载\dsp-master\dsp-master\dsp) 
+08:48:13.053 [main] INFO  com.taiyear.dsp.QuickTest - No active profile set, falling back to default profiles: default 
+08:48:19.670 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed 
+08:48:19.695 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s) 
+08:48:19.706 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references 
+08:48:19.801 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: indexUsingPOST_1 
+08:48:19.829 [main] INFO  com.taiyear.dsp.QuickTest - Started QuickTest in 9.078 seconds (JVM running for 11.58) 
+09:31:28.463 [main] INFO  com.taiyear.dsp.QuickStart - Starting QuickStart on Q4G31SSNBI1IJ76 with PID 6128 (D:\DMP-dsp\dsp\target\test-classes started by Administrator in D:\DMP-dsp\dsp) 
+09:31:28.494 [main] INFO  com.taiyear.dsp.QuickStart - No active profile set, falling back to default profiles: default 
+09:31:34.019 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: marketing 
+09:31:34.022 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: send_marketing 
+09:31:34.049 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_simple_send_marketing 
+09:31:34.066 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: marketing 
+09:31:34.067 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: send_marketing 
+09:31:34.068 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_simple_send_marketing 
+09:31:34.069 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: marketing 
+09:31:34.071 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: send_marketing 
+09:31:34.072 [main] INFO  java.sql.DatabaseMetaData - HHH000262: Table not found: t_simple_send_marketing 
+09:31:34.389 [main] ERROR o.s.boot.SpringApplication - Application startup failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'simpleController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.taiyear.dsp.simple.service.SimpleService com.taiyear.dsp.simple.controller.SimpleController.simpleService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.taiyear.dsp.simple.service.SimpleService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766)
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180)
+	at com.taiyear.dsp.QuickStart.main(QuickStart.java:27)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.taiyear.dsp.simple.service.SimpleService com.taiyear.dsp.simple.controller.SimpleController.simpleService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.taiyear.dsp.simple.service.SimpleService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 17 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.taiyear.dsp.simple.service.SimpleService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
+	... 19 common frames omitted
+09:34:43.063 [main] INFO  com.taiyear.dsp.QuickStart - Starting QuickStart on Q4G31SSNBI1IJ76 with PID 3928 (D:\DMP-dsp\dsp\target\test-classes started by Administrator in D:\DMP-dsp\dsp) 
+09:34:43.067 [main] INFO  com.taiyear.dsp.QuickStart - No active profile set, falling back to default profiles: default 
+09:34:49.612 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed 
+09:34:49.643 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s) 
+09:34:49.657 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references 
+09:34:49.843 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: indexUsingPOST_1 
+09:34:49.954 [main] INFO  com.taiyear.dsp.QuickStart - Started QuickStart in 8.353 seconds (JVM running for 10.348) 
+09:47:54.843 [main] INFO  c.t.dsp.TestSendMakeController - Starting TestSendMakeController on Q4G31SSNBI1IJ76 with PID 6784 (D:\DMP-dsp\dsp\target\test-classes started by Administrator in D:\DMP-dsp\dsp) 
+09:47:54.847 [main] INFO  c.t.dsp.TestSendMakeController - No active profile set, falling back to default profiles: default 
+09:48:01.433 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed 
+09:48:01.460 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s) 
+09:48:01.476 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references 
+09:48:01.650 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: indexUsingPOST_1 
+09:48:01.673 [main] INFO  c.t.dsp.TestSendMakeController - Started TestSendMakeController in 8.348 seconds (JVM running for 10.689) 
+10:01:28.935 [main] INFO  com.taiyear.dsp.QuickStart - Starting QuickStart on Q4G31SSNBI1IJ76 with PID 3344 (D:\DMP-dsp\dsp\target\test-classes started by Administrator in D:\DMP-dsp\dsp) 
+10:01:28.939 [main] INFO  com.taiyear.dsp.QuickStart - No active profile set, falling back to default profiles: default 
+10:01:36.048 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed 
+10:01:36.076 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s) 
+10:01:36.092 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references 
+10:01:36.323 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: indexUsingPOST_1 
+10:01:36.440 [main] INFO  com.taiyear.dsp.QuickStart - Started QuickStart in 9.244 seconds (JVM running for 23.596) 
+10:02:22.475 [main] INFO  com.taiyear.dsp.QuickStart - Starting QuickStart on Q4G31SSNBI1IJ76 with PID 4656 (D:\DMP-dsp\dsp\target\test-classes started by Administrator in D:\DMP-dsp\dsp) 
+10:02:22.479 [main] INFO  com.taiyear.dsp.QuickStart - No active profile set, falling back to default profiles: default 
+10:02:29.755 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed 
+10:02:29.780 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s) 
+10:02:29.793 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references 
+10:02:30.133 [main] INFO  com.taiyear.dsp.QuickStart - Started QuickStart in 12.31 seconds (JVM running for 14.051) 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<returnsms>
+<returnstatus>Faild</returnstatus>
+<message>账户余额不足，请充值！</message>
+<remainpoint>0</remainpoint>
+<taskID>0</taskID>
+<successCounts>0</successCounts>
+</returnsms>
