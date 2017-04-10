@@ -49,6 +49,11 @@ public class MarketController extends BaseController{
 	@Autowired
 	SpecialListService specialListService;
 	
+	@RequestMapping("MessageList")
+	public ResultJson MessageList(int pageNo,int pageSize){
+		return marketingService.findAll(pageNo, pageSize);
+	} 
+	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	@ApiOperation("转发测试页面")
 	public ModelAndView index(){
@@ -68,6 +73,7 @@ public class MarketController extends BaseController{
 	}
 	
 	@RequestMapping("deleteImageFile")
+	@ApiOperation("删除文件")
 	public ResultJson deleteImageFile(@RequestParam("imageFile")String imageFile){
 		ResultJson res = new ResultJson();
 		File file = new File(imageFile);

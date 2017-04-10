@@ -13,8 +13,15 @@ public class RemoteSendMessage {
 	public static final String ACCOUNT = "taiyetg";
 	public static final String PAASSWORD = "888888";
 	
-	public RemoteSendMessage(){
-		
+	public static String generateShortUrlSo(String url){
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("url", url);
+		try {
+			return Jsoup.connect("http://bil.vc/shortUrl.php").data(data).post().text();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public static String sendMms(String title,String mobile,String content){
 		Document doc = null;

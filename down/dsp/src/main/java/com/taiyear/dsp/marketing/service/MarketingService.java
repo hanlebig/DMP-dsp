@@ -8,4 +8,6 @@ public interface MarketingService {
 	public ResultJson saveSMS(Marketing marketing);
 
 	public ResultJson saveSMMS(Marketing marketing);
+	
+	public ResultJson findAll(int pageNo,int pageSize);
 }
