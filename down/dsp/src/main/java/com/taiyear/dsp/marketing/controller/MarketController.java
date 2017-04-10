@@ -58,6 +58,7 @@ public class MarketController extends BaseController{
 	@RequestMapping("/sendSMS")
 	@ApiOperation("发送短信")
 	public ResultJson sendSMS(@RequestParam("marketing")Marketing marketing){
+		System.out.println("------------");
 		return marketingService.saveSMS(marketing);
 	}
 	@RequestMapping("/sendMMS")
