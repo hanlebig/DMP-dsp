@@ -78,18 +78,15 @@ public class MarketingServiceImpl implements MarketingService{
 					byte b [] = new byte[in.available()];
 					in.read(b);
 					in.close();
-					
 					String phoneBase64 = Base64.encode(mobile.getBytes());
 					String content =contents[i] + "?userPhone="+phoneBase64;
 					String url = content.substring(content.indexOf("http"), content.length());
 					String shortUrl = RemoteSendMessage.generateShortUrlSo(url);
 					content	= content.replace(url, shortUrl);
-					System.out.println(content);
 					String contentStr = "3,txt" + "|" + new BASE64Encoder().encode((content.getBytes("GBK")));
 					String fileP = suffix + "|" + new BASE64Encoder().encode(b);
 					//拼彩信
-					contentSum += ( contentStr +"," +fileP + ";");
-					
+					contentSum += contentStr +"," +fileP + ";";
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -97,7 +94,7 @@ public class MarketingServiceImpl implements MarketingService{
 			marketing.setMarketingType("4");
 			marketing.setCreateTime(new Date());
 			marketing.setUpdateTime(new Date());
-			String str =	RemoteSendMessage.sendMms(marketing.getMarketingName(), marketing.getSendAddress(), contentSum);
+			String str =	RemoteSendMessage.sendMms(marketing.getMarketingName(),mobile, contentSum);
 			String strs [] = str.split(":");
 			// 存储当前手机号
 			SendMarketing sendMarket = new SendMarketing();
