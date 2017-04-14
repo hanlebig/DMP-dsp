@@ -62,7 +62,21 @@ public class MarketingServiceImpl implements MarketingService{
 			res.setMsg("彩信中必须含有链接!");
 			return res;
 		}
-		
+		if(null == marketing.getMarketingSize() || "".equals(marketing.getMarketingSize())){
+			res.setMsg("图片的大小不能为空!");
+			return res;
+		}
+		int fileSizeSum = 0;
+		//短信
+		for(String fileSize : marketing.getMarketingSize().split(",")){
+			fileSizeSum += Integer.parseInt(fileSize);
+		}
+		fileSizeSum = fileSizeSum * 1000;
+		fileSizeSum += marketing.getMarketingContent().length();
+		if(fileSizeSum > 1024*300){
+			res.setMsg("彩信的数据不能大于300k");
+			return res;
+		}
 		marketing.setMarketingType("4");
 		marketing.setCreateTime(new Date());
 		marketing.setUpdateTime(new Date());
@@ -144,25 +158,11 @@ public class MarketingServiceImpl implements MarketingService{
 			res.setMsg("营销内容不能为空!");
 			return res;	
 		}
-		if(null == marketing.getMarketingSize() || "".equals(marketing.getMarketingSize())){
-			res.setMsg("图片的大小不能为空!");
-			return res;
-		}
 		if(-1 != marketing.getMarketingContent().indexOf("http") ){
 			res.setMsg("短信中必须含有链接!");
 			return res;
 		}
-		int fileSizeSum = 0;
-		//短信
-		for(String fileSize : marketing.getMarketingSize().split(",")){
-			fileSizeSum += Integer.parseInt(fileSize);
-		}
-		fileSizeSum = fileSizeSum * 1000;
-		fileSizeSum += marketing.getMarketingContent().length();
-		if(fileSizeSum > 1024*300){
-			res.setMsg("彩信的数据不能大于300k");
-			return res;
-		}
+		
 		marketing.setMarketingType("3");
 		marketing.setCreateTime(new Date());
 		marketing.setUpdateTime(new Date());
