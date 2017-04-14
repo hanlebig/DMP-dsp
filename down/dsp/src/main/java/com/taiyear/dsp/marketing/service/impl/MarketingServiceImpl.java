@@ -58,19 +58,26 @@ public class MarketingServiceImpl implements MarketingService{
 			res.setMsg("营销内容不能为空!");
 			return res;	
 		}
+		if(-1 != marketing.getMarketingContent().indexOf("http") ){
+			res.setMsg("彩信中必须含有链接!");
+			return res;
+		}
+		
+		marketing.setMarketingType("4");
+		marketing.setCreateTime(new Date());
+		marketing.setUpdateTime(new Date());
+//		marketing.getMarketingContent()
 		String contents [] = marketing.getMarketingContent().split(",");
 		String filePaths [] = marketing.getFilePath().split(",");
 		String contentSum = "";
+		
 		//存储编译号码
 		Marketing market = marketingRepository.save(marketing);
 		String [] mobiles = marketing.getSendAddress().split(",");
+		
 		for (String mobile : mobiles) {
 			//拼接短信内容
 			for (int i = 0; i < contents.length; i++) {
-				if(contents[i].length() > 70){
-					res.setMsg("短信内容在70个汉字以内!");
-					return res;	
-				}
 				String suffix = filePaths[i].substring(filePaths[i].lastIndexOf(".") + 1);
 				try {
 					File file = new File(filePaths[i]);
@@ -78,10 +85,9 @@ public class MarketingServiceImpl implements MarketingService{
 					byte b [] = new byte[in.available()];
 					in.read(b);
 					in.close();
-					String phoneBase64 = Base64.encode(mobile.getBytes());
-					String content =contents[i] + "?userPhone="+phoneBase64;
+					String content =contents[i];
 					String url = content.substring(content.indexOf("http"), content.length());
-					String shortUrl = RemoteSendMessage.generateShortUrlSo(url);
+					String shortUrl = RemoteSendMessage.generateShortUrlSo(url + "?marketingId=" + market.getId() + "&companyId=" + marketing.getCompanyId());
 					content	= content.replace(url, shortUrl);
 					String contentStr = "3,txt" + "|" + new BASE64Encoder().encode((content.getBytes("GBK")));
 					String fileP = suffix + "|" + new BASE64Encoder().encode(b);
@@ -91,9 +97,6 @@ public class MarketingServiceImpl implements MarketingService{
 					e.printStackTrace();
 				}
 			}
-			marketing.setMarketingType("4");
-			marketing.setCreateTime(new Date());
-			marketing.setUpdateTime(new Date());
 			String str =	RemoteSendMessage.sendMms(marketing.getMarketingName(),mobile, contentSum);
 			String strs [] = str.split(":");
 			// 存储当前手机号
@@ -141,26 +144,52 @@ public class MarketingServiceImpl implements MarketingService{
 			res.setMsg("营销内容不能为空!");
 			return res;	
 		}
-		if(marketing.getMarketingContent().length() > 70){
-			res.setMsg("短信内容在70个汉字以内!");
-			return res;	
+		if(null == marketing.getMarketingSize() || "".equals(marketing.getMarketingSize())){
+			res.setMsg("图片的大小不能为空!");
+			return res;
 		}
+		if(-1 != marketing.getMarketingContent().indexOf("http") ){
+			res.setMsg("短信中必须含有链接!");
+			return res;
+		}
+		int fileSizeSum = 0;
 		//短信
+		for(String fileSize : marketing.getMarketingSize().split(",")){
+			fileSizeSum += Integer.parseInt(fileSize);
+		}
+		fileSizeSum = fileSizeSum * 1000;
+		fileSizeSum += marketing.getMarketingContent().length();
+		if(fileSizeSum > 1024*300){
+			res.setMsg("彩信的数据不能大于300k");
+			return res;
+		}
 		marketing.setMarketingType("3");
 		marketing.setCreateTime(new Date());
 		marketing.setUpdateTime(new Date());
-		marketing.getMarketingContent();
+		Marketing market = marketingRepository.save(marketing);
+		
 		String [] mobiles = marketing.getSendAddress().split(",");
+		
+		
 		for (String mobile : mobiles) {
 			//长链接转短链接
-			String phoneBase64 = Base64.encode(mobile.getBytes());
-			String content = marketing.getMarketingContent()+"?userPhone="+phoneBase64;
+			String content = marketing.getMarketingContent();
 			String url = content.substring(content.indexOf("http"), content.length());
-			String shortUrl = RemoteSendMessage.generateShortUrlSo(url);
+			String shortUrl = RemoteSendMessage.generateShortUrlSo(url + "?marketingId=" + market.getId() + "&companyId=" + marketing.getCompanyId());
 			content	= content.replace(url, shortUrl);
 			//发送短信
-			String result = RemoteSendMessage.sendMessage(mobile, marketing.getMarketingContent());
-			Marketing market = marketingRepository.save(marketing);
+			int i = 0;
+			String send_content = "";
+			String result = "";
+			while (i < content.length()/70) {
+				if(i == content.length()/70){
+					send_content = content.substring(i*3,content.length());
+				}else{
+					send_content = content.substring(i*3, (i+1)*3);
+				}
+				result = RemoteSendMessage.sendMessage(mobile, send_content);
+				i ++ ;
+			}
 			Map<String, String> data = RemoteReceiverMessage.parseXml(result);
 			if(data.get("returnstatus".toUpperCase()).equals("Success")){
 			//存储编译号码
@@ -174,6 +203,9 @@ public class MarketingServiceImpl implements MarketingService{
 				sendMarket.setTaskId(data.get("taskID".toUpperCase()));
 				sendMarketrepository.save(sendMarket);
 				res.setSuccess(true);
+				if(content.length() / 70 > 1){
+					res.setObj("当前短信超出了70个字的范畴,被切割成了" + content.length() / 70+ "条短信发出!");
+				}
 				res.setMsg("发送成功!");
 			}else{
 				res.setMsg(data.get("message".toUpperCase()));
@@ -182,7 +214,6 @@ public class MarketingServiceImpl implements MarketingService{
 		}
 		return res;	
 	}
-
 	@Override
 	public ResultJson findAll(int pageNo,int pageSize) {
 		ResultJson res = new ResultJson();

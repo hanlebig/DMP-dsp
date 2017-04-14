@@ -82,10 +82,15 @@ public class Marketing extends AbstractEntity{
 	@Column(name = "plan_id")
 	private String planId;
 	
+	@ApiModelProperty("公司id")
+	@Column(name = "compay_id")
+	private String compayId;
 	
 	@ApiModelProperty("策略id")
 	@Column(name = "strategy_id")
 	private String strategyId;
+	
+	private String companyId;
 	
 	public String getMarketingType() {
 		return marketingType;
@@ -197,5 +202,13 @@ public class Marketing extends AbstractEntity{
 
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }
