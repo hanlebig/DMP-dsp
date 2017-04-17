@@ -18,27 +18,17 @@ public class RemoteSendMessage {
 	public static final String ACCOUNT = "taiyetg";
 	public static final String PAASSWORD = "888888";
 	public static void main(String[] args) {
-		Map<String, String> data = new HashMap<String, String>();
 		String url = "http://blog.csdn.net/czp11210/article/details/47022639";
-		data.put("url", url);
-//		data.put("signature", "su2dn2nx3s2f4e12ewdcx4dx3xe3xsd3f");
-		data.put("app_id", "100001");
-		String d = JSON.toJSONString(data);
-		List<String> list = new ArrayList<String>();
-		for (int j = 0; j < d.length(); j++) {
-			list.add(String.valueOf(d.charAt(j)));
-		} 
-//		System.out.println(Arrays.sort(list));	
-		//		String url = RemoteSendMessage.generateShortUrlSo("http://blog.csdn.net/czp11210/article/details/47022639");
-//		System.out.println(url);
+		String url2 = RemoteSendMessage.generateShortUrlSo(url);
+		System.out.println(url2);
 	}
 	public static String generateShortUrlSo(String url){
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("url", url);
-		data.put("signature", "su2dn2nx3s2f4e12ewdcx4dx3xe3xsd3f");
-		data.put("app_id", "100001");
+		data.put("signature",SortUrl.getSignature(url));
+		data.put("app_id",SortUrl.APP_ID);
 		try {
-			return Jsoup.connect("http://bil.vc/shortUrl.php").data(data).post().text();
+			return Jsoup.connect("http://bil.vc/shortUrl.php").data(data).get().text();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
