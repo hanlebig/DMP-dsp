@@ -25,13 +25,14 @@ import org.yaml.snakeyaml.constructor.BaseConstructor;
 
 import com.taiyear.dsp.base.AbstractEntity;
 import com.taiyear.dsp.base.BaseController;
+import com.taiyear.dsp.entity.SpecialList;
 import com.taiyear.dsp.marketing.entity.Marketing;
-import com.taiyear.dsp.marketing.entity.SpecialList;
 import com.taiyear.dsp.marketing.entity.thread.ResultJson;
 import com.taiyear.dsp.marketing.service.MarketingService;
-import com.taiyear.dsp.marketing.service.SpecialListService;
+import com.taiyear.dsp.service.SpecialListService;
 
 /**
+ * 上传广告相关的Controller
  * @author hanle
  * @Time：2017年4月6日 上午9:46:44
  * @version 1.0
@@ -44,10 +45,10 @@ import com.taiyear.dsp.marketing.service.SpecialListService;
 public class MarketController extends BaseController{
 	
 	@Autowired
-	MarketingService marketingService;
+	private MarketingService marketingService;
 	
 	@Autowired
-	SpecialListService specialListService;
+	private SpecialListService specialListService;
 	
 	@RequestMapping("MessageList")
 	public ResultJson MessageList(int pageNo,int pageSize){
@@ -147,4 +148,50 @@ public class MarketController extends BaseController{
 		}
 		return res;	
 	}
+	
+	
+	@RequestMapping("/updateMarketingStatus")
+	@ApiOperation("批量更新广告状态")
+	public ResultJson updateMarketingStatus(@RequestParam("ids")String [] ids,@RequestParam("status")String status){
+		
+		return marketingService.updateMarketingStatus(ids,status);
+
+	}
+	
+	
+	@RequestMapping("/deleteMarketing")
+	@ApiOperation("批量删除广告状态")
+	public ResultJson deleteMarketing(@RequestParam("ids")String [] ids){
+		
+		return marketingService.delete(ids);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
