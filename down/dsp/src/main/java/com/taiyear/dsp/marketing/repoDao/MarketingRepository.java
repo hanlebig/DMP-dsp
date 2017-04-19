@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.taiyear.dsp.marketing.entity.Marketing;
 
-public interface MarketingRepository extends JpaRepository<Marketing, Long>{
+public interface MarketingRepository extends JpaRepository<Marketing, String>{
 	Page findAll(Pageable pageable);
 }
