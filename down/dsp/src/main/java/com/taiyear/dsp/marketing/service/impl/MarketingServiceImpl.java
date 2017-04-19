@@ -66,6 +66,16 @@ public class MarketingServiceImpl implements MarketingService{
 			res.setMsg("图片的大小不能为空!");
 			return res;
 		}
+		
+		
+		//判断客户发送测试短信是否达到上限
+		int count = sendMarketrepository.findSendMarketByCompanyId(marketing.getCompanyId());
+		String [] testMobiles = marketing.getSendAddress().split(",");
+		if(count+testMobiles.length>50){
+			res.setMsg("您发送的测试短信超过50条");
+			return res;
+		}
+		
 		int fileSizeSum = 0;
 		//短信
 		for(String fileSize : marketing.getMarketingSize().split(",")){
@@ -163,6 +173,14 @@ public class MarketingServiceImpl implements MarketingService{
 			return res;
 		}
 		
+		//判断客户发送测试短信是否达到上限
+		int count = sendMarketrepository.findSendMarketByCompanyId(marketing.getCompanyId());
+		String [] testMobiles = marketing.getSendAddress().split(",");
+		if(count+testMobiles.length>50){
+			res.setMsg("您发送的测试短信超过50条");
+			return res;
+		}
+		
 		marketing.setMarketingType("3");
 		marketing.setCreateTime(new Date());
 		marketing.setUpdateTime(new Date());
@@ -228,4 +246,33 @@ public class MarketingServiceImpl implements MarketingService{
 		}
 		return res;
 	}
+
+	@Override
+	public ResultJson updateMarketingStatus(String[] ids, String status) {
+		
+		ResultJson res = new ResultJson();
+		for(String id : ids){
+			Marketing marketing = marketingRepository.findOne(id);
+			marketing.setMarketingStatus(status);
+			marketingRepository.save(marketing);
+		}
+	
+		res.setMsg("批量修改成功");
+		return res;
+	}
+
+	@Override
+	public ResultJson delete(String[] ids) {
+		ResultJson res = new ResultJson();
+		for(String id : ids){
+			marketingRepository.delete(id);
+		}
+		res.setMsg("批量删除成功");
+				
+		
+		return res;
+	}
+
 }
+
+
