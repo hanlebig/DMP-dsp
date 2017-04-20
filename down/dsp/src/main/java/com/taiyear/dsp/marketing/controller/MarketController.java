@@ -96,17 +96,11 @@ public class MarketController extends BaseController{
 		ResultJson res = super.upload(1024 * 45, imageFile, request);
 		//上传图片
 		if(res.isSuccess()){
-			Marketing marketing = new Marketing();
 			Material material = new Material();
-			
 			material.setImgPath(res.getObj().toString());
 			material.setAuditStatus(Material.AUDIT_SATAUS_WAIT_SUCCESS);
-			
-			materialService.insertMaterial(material);
-			
-			marketing.setFilePath(res.getObj().toString());
-			marketing.setMarketingSize(String.valueOf(imageFile.getSize()));
-			res.setObj(marketing);
+			material.setImgSize(String.valueOf(imageFile.getSize()));
+			res = materialService.insertMaterial(material);
 		}
 		return res;
 	}

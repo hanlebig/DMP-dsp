@@ -37,7 +37,8 @@ public class MaterialServiceImpl implements MaterialService {
 		}
 		material.setCreateTime(new Date());
 		material.setUpdateTime(new Date());
-		materialRepository.save(material);
+		Material materialVo = materialRepository.save(material);
+		res.setObj(materialVo);
 		res.setSuccess(true);
 		res.setMsg("素材上传成功");
 		return res;

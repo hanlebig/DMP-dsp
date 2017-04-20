@@ -40,6 +40,10 @@ public class Material extends AbstractEntity{
 	@Column(name = "audit_user_id")
 	private String auditUserId; //审核人
 
+	@ApiModelProperty("图片大小")
+	@Column(name = "img_size")
+	private String imgSize; //审核人
+	
 	public String getImgPath() {
 		return imgPath;
 	}
@@ -79,4 +83,13 @@ public class Material extends AbstractEntity{
 	public void setAuditUserId(String auditUserId) {
 		this.auditUserId = auditUserId;
 	}
+
+	public String getImgSize() {
+		return imgSize;
+	}
+
+	public void setImgSize(String imgSize) {
+		this.imgSize = imgSize;
+	}
+	
 }
