@@ -2,6 +2,7 @@ package com.taiyear.dsp.marketing.entity;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -94,9 +95,8 @@ public class Marketing extends AbstractEntity{
 	@Column(name = "company_id")
 	private String companyId;
 	
-	@ApiModelProperty("图片id")
-	@Column(name = "material_id")
-	private String materialId;
+	
+	private List<String> materialIds;
 	
 	public String getMarketingType() {
 		return marketingType;
@@ -226,11 +226,12 @@ public class Marketing extends AbstractEntity{
 		this.compayId = compayId;
 	}
 
-	public String getMaterialId() {
-		return materialId;
+	public List<String> getMaterialIds() {
+		return materialIds;
 	}
 
-	public void setMaterialId(String materialId) {
-		this.materialId = materialId;
+	public void setMaterialIds(List<String> materialIds) {
+		this.materialIds = materialIds;
 	}
+	
 }
