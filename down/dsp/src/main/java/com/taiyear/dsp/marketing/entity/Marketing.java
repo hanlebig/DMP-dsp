@@ -90,7 +90,13 @@ public class Marketing extends AbstractEntity{
 	@Column(name = "strategy_id")
 	private String strategyId;
 	
+	@ApiModelProperty("公司id")
+	@Column(name = "company_id")
 	private String companyId;
+	
+	@ApiModelProperty("图片id")
+	@Column(name = "material_id")
+	private String materialId;
 	
 	public String getMarketingType() {
 		return marketingType;
@@ -210,5 +216,21 @@ public class Marketing extends AbstractEntity{
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getCompayId() {
+		return compayId;
+	}
+
+	public void setCompayId(String compayId) {
+		this.compayId = compayId;
+	}
+
+	public String getMaterialId() {
+		return materialId;
+	}
+
+	public void setMaterialId(String materialId) {
+		this.materialId = materialId;
 	}
 }

@@ -268,8 +268,6 @@ public class MarketingServiceImpl implements MarketingService{
 			marketingRepository.delete(id);
 		}
 		res.setMsg("批量删除成功");
-				
-		
 		return res;
 	}
 

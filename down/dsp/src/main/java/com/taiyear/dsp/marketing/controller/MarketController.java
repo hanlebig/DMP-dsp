@@ -15,21 +15,20 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.yaml.snakeyaml.constructor.BaseConstructor;
 
-import com.taiyear.dsp.base.AbstractEntity;
 import com.taiyear.dsp.base.BaseController;
-import com.taiyear.dsp.entity.SpecialList;
 import com.taiyear.dsp.marketing.entity.Marketing;
+import com.taiyear.dsp.marketing.entity.Material;
 import com.taiyear.dsp.marketing.entity.thread.ResultJson;
 import com.taiyear.dsp.marketing.service.MarketingService;
-import com.taiyear.dsp.service.SpecialListService;
+import com.taiyear.dsp.marketing.service.MaterialService;
 
 /**
  * 上传广告相关的Controller
@@ -47,8 +46,10 @@ public class MarketController extends BaseController{
 	@Autowired
 	private MarketingService marketingService;
 	
+//	@Autowired
+//	private SpecialListService specialListService;
 	@Autowired
-	private SpecialListService specialListService;
+	MaterialService materialService;
 	
 	@RequestMapping("MessageList")
 	public ResultJson MessageList(int pageNo,int pageSize){
@@ -61,19 +62,19 @@ public class MarketController extends BaseController{
 		return new ModelAndView("index");
 	}
 	
-	@RequestMapping("/sendSMS")
+	@RequestMapping(value="/sendSMS",method = RequestMethod.POST)
 	@ApiOperation("发送短信")
-	public ResultJson sendSMS(@RequestParam("marketing")Marketing marketing){
+	public ResultJson sendSMS(@RequestBody Marketing marketing){
 		System.out.println("------------");
 		return marketingService.saveSMS(marketing);
 	}
-	@RequestMapping("/sendMMS")
+	@RequestMapping(value="/sendMMS", method = RequestMethod.POST)
 	@ApiOperation("发送彩信")
-	public ResultJson sendMMs(@RequestParam("marketing")Marketing marketing){
+	public ResultJson sendMMs(@RequestBody  Marketing marketing){
 		return marketingService.saveSMMS(marketing);
 	}
 	
-	@RequestMapping("deleteImageFile")
+	@RequestMapping(value="deleteImageFile",method = RequestMethod.GET)
 	@ApiOperation("删除文件")
 	public ResultJson deleteImageFile(@RequestParam("imageFile")String imageFile){
 		ResultJson res = new ResultJson();
@@ -89,13 +90,20 @@ public class MarketController extends BaseController{
 		return res;
 	}
 	
-	@RequestMapping("/handleImageUpload")
+	@RequestMapping(value = "/handleImageUpload",method = RequestMethod.GET)
 	@ApiOperation("上传图片")
 	public ResultJson handleImageUpload(@RequestParam("imageFile")MultipartFile imageFile,HttpServletRequest request){
 		ResultJson res = super.upload(1024 * 45, imageFile, request);
 		//上传图片
 		if(res.isSuccess()){
 			Marketing marketing = new Marketing();
+			Material material = new Material();
+			
+			material.setImgPath(res.getObj().toString());
+			material.setAuditStatus(Material.AUDIT_SATAUS_WAIT_SUCCESS);
+			
+			materialService.insertMaterial(material);
+			
 			marketing.setFilePath(res.getObj().toString());
 			marketing.setMarketingSize(String.valueOf(imageFile.getSize()));
 			res.setObj(marketing);
@@ -104,7 +112,7 @@ public class MarketController extends BaseController{
 	}
 	
 	
-	@RequestMapping("/handleExcelUpload")
+	@RequestMapping(value = "/handleExcelUpload", method = RequestMethod.GET)
 	@ApiOperation("上传excel")
 	public ResultJson handleExcelUpload(@RequestParam("file")MultipartFile file){
 		ResultJson res = new ResultJson();
@@ -150,48 +158,16 @@ public class MarketController extends BaseController{
 	}
 	
 	
-	@RequestMapping("/updateMarketingStatus")
+	@RequestMapping(value = "/updateMarketingStatus",method = RequestMethod.POST)
 	@ApiOperation("批量更新广告状态")
 	public ResultJson updateMarketingStatus(@RequestParam("ids")String [] ids,@RequestParam("status")String status){
-		
 		return marketingService.updateMarketingStatus(ids,status);
 
 	}
 	
-	
-	@RequestMapping("/deleteMarketing")
+	@RequestMapping(value = "/deleteMarketing",method = RequestMethod.GET)
 	@ApiOperation("批量删除广告状态")
 	public ResultJson deleteMarketing(@RequestParam("ids")String [] ids){
-		
 		return marketingService.delete(ids);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

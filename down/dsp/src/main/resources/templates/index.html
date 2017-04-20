@@ -5,8 +5,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="${request.contextPath}/market/handleImageUpload/" method="POST" enctype="multipart/form-data">
-	<input type="file" name=imageFile>
+<form action="${request.contextPath}/market/sendSMS/" method="POST" enctype="multipart/form-data">
+	<input name="marketingSize">
 	<input type="submit" value="提交">
 </form>
 </body>

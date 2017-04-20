@@ -1,6 +1,10 @@
 package com.taiyear.dsp.utils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.IDN;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,17 +15,21 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 
 public class RemoteSendMessage {
 	public static final String USERID = "184";
 	public static final String ACCOUNT = "taiyetg";
 	public static final String PAASSWORD = "888888";
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws UnsupportedEncodingException {
 		String url = "http://blog.csdn.net/czp11210/article/details/47022639";
 		String url2 = RemoteSendMessage.generateShortUrlSo(url);
-		System.out.println(url2);
+		JSONObject json = JSON.parseObject(url2);
+		System.out.println(json.getString("message"));
 	}
+	
 	public static String generateShortUrlSo(String url){
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("url", url);
