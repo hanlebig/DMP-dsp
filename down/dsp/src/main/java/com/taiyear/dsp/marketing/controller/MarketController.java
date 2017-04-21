@@ -61,18 +61,27 @@ public class MarketController extends BaseController{
 	public ModelAndView index(){
 		return new ModelAndView("index");
 	}
-	
-	@RequestMapping(value="/sendSMS",method = RequestMethod.POST)
-	@ApiOperation("发送短信")
-	public ResultJson sendSMS(@RequestBody Marketing marketing){
-		System.out.println("------------");
+	@RequestMapping(value="/saveSMS",method = RequestMethod.POST)
+	@ApiOperation("保存短信")
+	public ResultJson saveSMS(@RequestBody Marketing marketing){
 		return marketingService.saveSMS(marketing);
 	}
-	@RequestMapping(value="/sendMMS", method = RequestMethod.POST)
-	@ApiOperation("发送彩信")
-	public ResultJson sendMMs(@RequestBody  Marketing marketing){
+	
+	@RequestMapping(value="/saveSMMS", method = RequestMethod.POST)
+	@ApiOperation("保存彩信")
+	public ResultJson saveSMMS(@RequestBody  Marketing marketing){
 		return marketingService.saveSMMS(marketing);
 	}
+//	@RequestMapping(value="/sendSMS",method = RequestMethod.POST)
+//	@ApiOperation("发送短信")
+//	public ResultJson sendSMS(@RequestBody Marketing marketing){
+//		return marketingService.saveSMS(marketing);
+//	}
+//	@RequestMapping(value="/sendMMS", method = RequestMethod.POST)
+//	@ApiOperation("发送彩信")
+//	public ResultJson sendMMs(@RequestBody  Marketing marketing){
+//		return marketingService.saveSMMS(marketing);
+//	}
 	
 	@RequestMapping(value="deleteImageFile",method = RequestMethod.GET)
 	@ApiOperation("删除文件")
