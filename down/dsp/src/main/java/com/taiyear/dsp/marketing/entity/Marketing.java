@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.taiyear.dsp.base.AbstractEntity;
 
@@ -94,8 +95,7 @@ public class Marketing extends AbstractEntity{
 	@ApiModelProperty("公司id")
 	@Column(name = "company_id")
 	private String companyId;
-	
-	
+	@Transient 
 	private List<String> materialIds;
 	
 	public String getMarketingType() {

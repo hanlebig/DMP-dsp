@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
+import javax.print.DocFlavor.STRING;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +31,70 @@ public class MarketingServiceImpl implements MarketingService{
 	MarketingRepository marketingRepository;
 	@Autowired
 	SendMarketrepository sendMarketrepository;
+	public ResultJson sendSMMS(){
+		//判断客户发送测试短信是否达到上限
+//		int count = sendMarketrepository.findSendMarketByCompanyId(marketing.getCompanyId());
+//		String [] testMobiles = marketing.getSendAddress().split(",");
+//		if(count+testMobiles.length>50){
+//			res.setMsg("您发送的测试短信超过50条");
+//			return res;
+//		}
+//		String contents [] = marketing.getMarketingContent().split(",");
+//		String filePaths [] = marketing.getFilePath().split(",");
+//		String contentSum = "";
+//		//存储编译号码
+//		Marketing market = marketingRepository.save(marketing);
+//		String [] mobiles = marketing.getSendAddress().split(",");
+//		
+//		for (String mobile : mobiles) {
+//			//拼接短信内容
+//			for (int i = 0; i < contents.length; i++) {
+//				String suffix = filePaths[i].substring(filePaths[i].lastIndexOf(".") + 1);
+//				try {
+//					File file = new File(filePaths[i]);
+//					FileInputStream in = new FileInputStream(file);
+//					byte b [] = new byte[in.available()];
+//					in.read(b);
+//					in.close();
+//					String content =contents[i];
+//					String url = content.substring(content.indexOf("http"), content.length());
+//					String shortUrl = RemoteSendMessage.generateShortUrlSo(url + "?marketingId=" + market.getId() + "&companyId=" + marketing.getCompanyId());
+//					content	= content.replace(url, shortUrl);
+//					String contentStr = "3,txt" + "|" + new BASE64Encoder().encode((content.getBytes("GBK")));
+//					String fileP = suffix + "|" + new BASE64Encoder().encode(b);
+//					//拼彩信
+//					contentSum += contentStr +"," +fileP + ";";
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			String str =	RemoteSendMessage.sendMms(marketing.getMarketingName(),mobile, contentSum);
+//			String strs [] = str.split(":");
+//			// 存储当前手机号
+//			SendMarketing sendMarket = new SendMarketing();
+//			sendMarket.setMarketingId(market.getId());
+//			sendMarket.setMobile(mobile);
+//			sendMarket.setSendCount(mobiles.length);
+//			sendMarket.setSendTime(new Date());
+//			sendMarket.setSendType("4");
+//			if(strs.length == 2){
+//				sendMarket.setTaskId(strs[1]);
+//				res.setMsg("发送成功!");
+//				res.setSuccess(true);
+//			}else if(str.equals("6")){
+//				sendMarket.setTaskId(str);
+//				res.setMsg("您的账户余额不足");
+//				res.setSuccess(false);
+//			}else{
+//				sendMarket.setTaskId(str);
+//				res.setMsg("系统出现错误,请联系管理员!");
+//				res.setSuccess(false);
+//			}
+//			sendMarketrepository.save(sendMarket);
+//		}
+		return null;
+	}
+	
 	
 	@Override
 	public ResultJson saveSMMS(Marketing marketing) {
@@ -66,16 +132,6 @@ public class MarketingServiceImpl implements MarketingService{
 			res.setMsg("图片的大小不能为空!");
 			return res;
 		}
-		
-		
-		//判断客户发送测试短信是否达到上限
-		int count = sendMarketrepository.findSendMarketByCompanyId(marketing.getCompanyId());
-		String [] testMobiles = marketing.getSendAddress().split(",");
-		if(count+testMobiles.length>50){
-			res.setMsg("您发送的测试短信超过50条");
-			return res;
-		}
-		
 		int fileSizeSum = 0;
 		//短信
 		for(String fileSize : marketing.getMarketingSize().split(",")){
@@ -90,61 +146,10 @@ public class MarketingServiceImpl implements MarketingService{
 		marketing.setMarketingType("4");
 		marketing.setCreateTime(new Date());
 		marketing.setUpdateTime(new Date());
-//		marketing.getMarketingContent()
-		String contents [] = marketing.getMarketingContent().split(",");
-		String filePaths [] = marketing.getFilePath().split(",");
-		String contentSum = "";
-		
-		//存储编译号码
 		Marketing market = marketingRepository.save(marketing);
-		String [] mobiles = marketing.getSendAddress().split(",");
-		
-		for (String mobile : mobiles) {
-			//拼接短信内容
-			for (int i = 0; i < contents.length; i++) {
-				String suffix = filePaths[i].substring(filePaths[i].lastIndexOf(".") + 1);
-				try {
-					File file = new File(filePaths[i]);
-					FileInputStream in = new FileInputStream(file);
-					byte b [] = new byte[in.available()];
-					in.read(b);
-					in.close();
-					String content =contents[i];
-					String url = content.substring(content.indexOf("http"), content.length());
-					String shortUrl = RemoteSendMessage.generateShortUrlSo(url + "?marketingId=" + market.getId() + "&companyId=" + marketing.getCompanyId());
-					content	= content.replace(url, shortUrl);
-					String contentStr = "3,txt" + "|" + new BASE64Encoder().encode((content.getBytes("GBK")));
-					String fileP = suffix + "|" + new BASE64Encoder().encode(b);
-					//拼彩信
-					contentSum += contentStr +"," +fileP + ";";
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			String str =	RemoteSendMessage.sendMms(marketing.getMarketingName(),mobile, contentSum);
-			String strs [] = str.split(":");
-			// 存储当前手机号
-			SendMarketing sendMarket = new SendMarketing();
-			sendMarket.setMarketingId(market.getId());
-			sendMarket.setMobile(mobile);
-			sendMarket.setSendCount(mobiles.length);
-			sendMarket.setSendTime(new Date());
-			sendMarket.setSendType("4");
-			if(strs.length == 2){
-				sendMarket.setTaskId(strs[1]);
-				res.setMsg("发送成功!");
-				res.setSuccess(true);
-			}else if(str.equals("6")){
-				sendMarket.setTaskId(str);
-				res.setMsg("您的账户余额不足");
-				res.setSuccess(false);
-			}else{
-				sendMarket.setTaskId(str);
-				res.setMsg("系统出现错误,请联系管理员!");
-				res.setSuccess(false);
-			}
-			sendMarketrepository.save(sendMarket);
-		}
+		res.setSuccess(true);
+		res.setMsg("彩信信创建成功!");
+		res.setObj(market);
 		return res;	
 	}
 	
@@ -172,64 +177,13 @@ public class MarketingServiceImpl implements MarketingService{
 			res.setMsg("短信中必须含有链接!");
 			return res;
 		}
-		
-		//判断客户发送测试短信是否达到上限
-		int count = sendMarketrepository.findSendMarketByCompanyId(marketing.getCompanyId());
-		String [] testMobiles = marketing.getSendAddress().split(",");
-		if(count+testMobiles.length>50){
-			res.setMsg("您发送的测试短信超过50条");
-			return res;
-		}
-		
 		marketing.setMarketingType("3");
 		marketing.setCreateTime(new Date());
 		marketing.setUpdateTime(new Date());
 		Marketing market = marketingRepository.save(marketing);
-		
-		String [] mobiles = marketing.getSendAddress().split(",");
-		
-		
-		for (String mobile : mobiles) {
-			//长链接转短链接
-			String content = marketing.getMarketingContent();
-			String url = content.substring(content.indexOf("http"), content.length());
-			String shortUrl = RemoteSendMessage.generateShortUrlSo(url + "?marketingId=" + market.getId() + "&companyId=" + marketing.getCompanyId());
-			content	= content.replace(url, shortUrl);
-			//发送短信
-			int i = 0;
-			String send_content = "";
-			String result = "";
-			while (i < content.length()/70) {
-				if(i == content.length()/70){
-					send_content = content.substring(i*3,content.length());
-				}else{
-					send_content = content.substring(i*3, (i+1)*3);
-				}
-				result = RemoteSendMessage.sendMessage(mobile, send_content);
-				i ++ ;
-			}
-			Map<String, String> data = RemoteReceiverMessage.parseXml(result);
-			if(data.get("returnstatus".toUpperCase()).equals("Success")){
-			//存储编译号码
-			// 存储当前手机号
-				SendMarketing sendMarket = new SendMarketing();
-				sendMarket.setMarketingId(market.getId());
-				sendMarket.setMobile(mobile);
-				sendMarket.setSendCount(mobiles.length);
-				sendMarket.setSendTime(new Date());
-				sendMarket.setSendType("3");
-				sendMarket.setTaskId(data.get("taskID".toUpperCase()));
-				sendMarketrepository.save(sendMarket);
-				res.setSuccess(true);
-				if(content.length() / 70 > 1){
-					res.setObj("当前短信超出了70个字的范畴,被切割成了" + content.length() / 70+ "条短信发出!");
-				}
-				res.setMsg("发送成功!");
-			}else{
-				res.setMsg(data.get("message".toUpperCase()));
-				res.setSuccess(false);
-			}
-		}
+		res.setSuccess(true);
+		res.setMsg("短信创建成功!");
+		res.setObj(market);
 		return res;	
 	}
 	@Override
@@ -246,7 +200,57 @@ public class MarketingServiceImpl implements MarketingService{
 		}
 		return res;
 	}
-
+	public void sendSMS(String marketId){
+		//判断客户发送测试短信是否达到上限
+//		int count = sendMarketrepository.findSendMarketByCompanyId(marketing.getCompanyId());
+//		String [] testMobiles = marketing.getSendAddress().split(",");
+//		if(count+testMobiles.length>50){
+//			res.setMsg("您发送的测试短信超过50条");
+//			return res;
+//		}
+//		String [] mobiles = marketing.getSendAddress().split(",");
+//		for (String mobile : mobiles) {
+//			//长链接转短链接
+//			String content = marketing.getMarketingContent();
+//			String url = content.substring(content.indexOf("http"), content.length());
+//			String shortUrl = RemoteSendMessage.generateShortUrlSo(url + "?marketingId=" + market.getId() + "&companyId=" + marketing.getCompanyId());
+//			content	= content.replace(url, shortUrl);
+//			//发送短信
+//			int i = 0;
+//			String send_content = "";
+//			String result = "";
+//			while (i < content.length()/70) {
+//				if(i == content.length()/70){
+//					send_content = content.substring(i*3,content.length());
+//				}else{
+//					send_content = content.substring(i*3, (i+1)*3);
+//				}
+//				result = RemoteSendMessage.sendMessage(mobile, send_content);
+//				i ++ ;
+//			}
+//			Map<String, String> data = RemoteReceiverMessage.parseXml(result);
+//			if(data.get("returnstatus".toUpperCase()).equals("Success")){
+//			//存储编译号码
+//			// 存储当前手机号
+//				SendMarketing sendMarket = new SendMarketing();
+//				sendMarket.setMarketingId(market.getId());
+//				sendMarket.setMobile(mobile);
+//				sendMarket.setSendCount(mobiles.length);
+//				sendMarket.setSendTime(new Date());
+//				sendMarket.setSendType("3");
+//				sendMarket.setTaskId(data.get("taskID".toUpperCase()));
+//				sendMarketrepository.save(sendMarket);
+//				res.setSuccess(true);
+//				if(content.length() / 70 > 1){
+//					res.setObj("当前短信超出了70个字的范畴,被切割成了" + content.length() / 70+ "条短信发出!");
+//				}
+//				res.setMsg("发送成功!");
+//			}else{
+//				res.setMsg(data.get("message".toUpperCase()));
+//				res.setSuccess(false);
+//			}
+//		}
+	}
 	@Override
 	public ResultJson updateMarketingStatus(String[] ids, String status) {
 		
