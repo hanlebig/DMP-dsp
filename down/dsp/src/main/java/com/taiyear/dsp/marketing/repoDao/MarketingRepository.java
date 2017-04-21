@@ -9,7 +9,5 @@ import com.taiyear.dsp.marketing.entity.Marketing;
 
 public interface MarketingRepository extends JpaRepository<Marketing, String>{
 	Page findAll(Pageable pageable);
-
-
 }
 

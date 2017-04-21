@@ -95,8 +95,10 @@ public class Marketing extends AbstractEntity{
 	@ApiModelProperty("公司id")
 	@Column(name = "company_id")
 	private String companyId;
-	@Transient 
-	private List<String> materialIds;
+	
+	@ApiModelProperty("短链接")
+	@Column(name = "short_url")
+	private String shortUrl;
 	
 	public String getMarketingType() {
 		return marketingType;
@@ -226,12 +228,12 @@ public class Marketing extends AbstractEntity{
 		this.compayId = compayId;
 	}
 
-	public List<String> getMaterialIds() {
-		return materialIds;
+	public String getShortUrl() {
+		return shortUrl;
 	}
 
-	public void setMaterialIds(List<String> materialIds) {
-		this.materialIds = materialIds;
+	public void setShortUrl(String shortUrl) {
+		this.shortUrl = shortUrl;
 	}
 	
 }

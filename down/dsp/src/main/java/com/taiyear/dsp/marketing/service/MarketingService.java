@@ -21,7 +21,7 @@ public interface MarketingService {
 	 * @param marketing
 	 * @return
 	 */
-	public ResultJson saveSMMS(Marketing marketing);
+	public ResultJson saveSMMS(Marketing marketing,String[] ids);
 	
 	/**
 	 * 分页查询信息

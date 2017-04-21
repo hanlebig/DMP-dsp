@@ -69,8 +69,8 @@ public class MarketController extends BaseController{
 	
 	@RequestMapping(value="/saveSMMS", method = RequestMethod.POST)
 	@ApiOperation("保存彩信")
-	public ResultJson saveSMMS(@RequestBody  Marketing marketing){
-		return marketingService.saveSMMS(marketing);
+	public ResultJson saveSMMS(@RequestBody  Marketing marketing,String ids[]){
+		return marketingService.saveSMMS(marketing,ids);
 	}
 //	@RequestMapping(value="/sendSMS",method = RequestMethod.POST)
 //	@ApiOperation("发送短信")

@@ -52,10 +52,13 @@ public class SendMarketing extends AbstractEntity{
 	@Column(name = "plan_id")
 	private String planId;
 	
+	@ApiModelProperty("发送状态")
+	@Column(name="send_status")
+	private String sendStatus;
+	
 	@ApiModelProperty("策略id")
 	@Column(name = "strategy_id")
 	private String strategyId;
-	
 	public Date getSendTime() {
 		return sendTime;
 	}
@@ -74,6 +77,14 @@ public class SendMarketing extends AbstractEntity{
 
 	public String getMarketingId() {
 		return marketingId;
+	}
+
+	public String getSendStatus() {
+		return sendStatus;
+	}
+
+	public void setSendStatus(String sendStatus) {
+		this.sendStatus = sendStatus;
 	}
 
 	public void setMarketingId(String marketingId) {

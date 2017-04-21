@@ -36,7 +36,8 @@ public class RemoteSendMessage {
 		data.put("signature",SortUrl.getSignature(url));
 		data.put("app_id",SortUrl.APP_ID);
 		try {
-			return Jsoup.connect("http://bil.vc/shortUrl.php").data(data).get().text();
+			JSONObject obj = JSON.parseObject(Jsoup.connect("http://bil.vc/shortUrl.php").data(data).get().text());
+			return obj.getString("url_short");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
