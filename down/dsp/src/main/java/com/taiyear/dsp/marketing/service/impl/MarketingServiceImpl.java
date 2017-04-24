@@ -23,7 +23,7 @@ import com.taiyear.dsp.marketing.entity.SendMarketing;
 import com.taiyear.dsp.marketing.entity.thread.ResultJson;
 import com.taiyear.dsp.marketing.repoDao.MarketingRepository;
 import com.taiyear.dsp.marketing.repoDao.SendMarketrepository;
-import com.taiyear.dsp.marketing.service.MarketingAndMaterialSservice;
+import com.taiyear.dsp.marketing.service.MarketingAndMaterialService;
 import com.taiyear.dsp.marketing.service.MarketingService;
 import com.taiyear.dsp.utils.RemoteReceiverMessage;
 import com.taiyear.dsp.utils.RemoteSendMessage;
@@ -34,7 +34,7 @@ public class MarketingServiceImpl implements MarketingService{
 	@Autowired
 	SendMarketrepository sendMarketrepository;
 	@Autowired
-	MarketingAndMaterialSservice marketingAndMaterialSservice;
+	MarketingAndMaterialService marketingAndMaterialService;
 
 	public void sendSMS(String marketId){
 		//判断客户发送测试短信是否达到上限
@@ -199,7 +199,7 @@ public class MarketingServiceImpl implements MarketingService{
 			MarketingAndMaterial  andMaterial = new MarketingAndMaterial();
 			andMaterial.setMarketingId(updateMarket.getId());
 			andMaterial.setMaterialId(id);
-			marketingAndMaterialSservice.save(andMaterial);
+			marketingAndMaterialService.save(andMaterial);
 		}
 		res.setSuccess(true);
 		res.setMsg("彩信信创建成功!");
@@ -227,10 +227,17 @@ public class MarketingServiceImpl implements MarketingService{
 			res.setMsg("营销内容不能为空!");
 			return res;	
 		}
-		if(-1 != marketing.getMarketingContent().indexOf("http") ){
+		
+		if(-1 == marketing.getMarketingContent().indexOf("http") ){
+		
 			res.setMsg("短信中必须含有链接!");
 			return res;
 		}
+	/*	if(marketing.getMarketingContent().contains("http")){
+			res.setMsg("短信中必须含有链接!");
+			return res;
+		}*/
+
 		marketing.setMarketingType("3");
 		marketing.setCreateTime(new Date());
 		marketing.setUpdateTime(new Date());
@@ -265,23 +272,36 @@ public class MarketingServiceImpl implements MarketingService{
 	public ResultJson updateMarketingStatus(String[] ids, String status) {
 		
 		ResultJson res = new ResultJson();
-		for(String id : ids){
-			Marketing marketing = marketingRepository.findOne(id);
-			marketing.setMarketingStatus(status);
-			marketingRepository.save(marketing);
+		if(ids != null){
+			for(String id : ids){
+				Marketing marketing = marketingRepository.findOne(id);
+				marketing.setMarketingStatus(status);
+				marketingRepository.save(marketing);
+			}
+			res.setSuccess(true);
+			res.setMsg("批量修改成功");
+		}else{
+			res.setSuccess(false);
+			res.setMsg("批量修改失败");
 		}
-	
-		res.setMsg("批量修改成功");
+		
 		return res;
 	}
 
 	@Override
 	public ResultJson delete(String[] ids) {
 		ResultJson res = new ResultJson();
-		for(String id : ids){
-			marketingRepository.delete(id);
+		if(ids != null){
+			for(String id : ids){
+				marketingRepository.delete(id);
+			}
+			res.setSuccess(true);
+			res.setMsg("批量删除成功");
 		}
-		res.setMsg("批量删除成功");
+		else{
+			res.setSuccess(false);
+			res.setMsg("批量删除失败");
+		}
 		return res;
 	}
 
